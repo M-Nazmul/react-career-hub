@@ -5,10 +5,10 @@ const FeaturedJob = () => {
     const [jobs, setJobs] = useState([]);
     const [dataLength, setDataLength] = useState(4);
     useEffect(() => {
-        fetch('../../../public/jobs.json')
+        fetch('./jobs.json')
         .then(res => res.json())
         .then(data => setJobs(data))
-    },[])
+    },[]);
     return (
         <div>
             <div className="max-w-[653px] mx-auto px-4">

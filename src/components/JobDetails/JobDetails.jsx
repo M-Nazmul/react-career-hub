@@ -1,11 +1,28 @@
+import { useState } from "react";
 import { useLoaderData, useParams } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { saveJobApplication } from "../Utility/localstorage";
 
 const JobDetails = () => {
     const jobs = useLoaderData();
     const {id} = useParams();
     const intId = parseInt(id);
     const job = jobs.find(job => job.id === intId);
-    console.log(job, id);
+    // console.log(job, id);
+
+    const [toasts, setToasts] = useState();
+    
+    const handleApplyJob = () => {
+        saveJobApplication(intId);
+        if(!toasts){
+            setToasts(toast("You have applied successfully"));
+        }
+        else{
+            setToasts(toast("Already exists!"));
+        }
+    }
+
     return (
         <div className="px-4 py-14 md:py-32 max-w-[1440px] mx-auto">
             <h2 className="text-center text-3xl my-4">Job Details of: {job.job_title} </h2>
@@ -26,8 +43,10 @@ const JobDetails = () => {
                     <p className="my-4"><span className="font-bold">Phone:</span> {job.contact_information.phone}</p>
                     <p className="my-4"><span className="font-bold">Email:</span> {job.contact_information.email}</p>
                     <p className="my-4"><span className="font-bold">Address:</span> {job.contact_information.address}</p>
-                    <button className="btn btn-primary w-full">Apply now</button>
+                    <button onClick={handleApplyJob} className="btn btn-primary w-full">Apply now</button>
                 </div>
+                <ToastContainer />
+                
             </div>
         </div>
     );
