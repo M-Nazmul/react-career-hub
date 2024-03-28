@@ -1,10 +1,11 @@
 import { CiLocationOn } from "react-icons/ci";
 import { HiOutlineCurrencyDollar } from "react-icons/hi2";
 import PropTypes from 'prop-types'
+import { Link } from "react-router-dom";
 
 const Job = ({job}) => {
     console.log(job);
-    const {logo, job_title, company_name, location, remote_or_onsite, job_type, salary} = job;
+    const {id, logo, job_title, company_name, location, remote_or_onsite, job_type, salary} = job;
   return (
     <div>
         <div className="card card-compact max-w-[648px] bg-base-200 shadow-xl mx-auto p-10">
@@ -21,7 +22,7 @@ const Job = ({job}) => {
                     <h2 className="flex items-center gap-1"> <HiOutlineCurrencyDollar /> {salary}</h2>
                 </div>
                 <div className="card-actions">
-                <button className="btn btn-primary">View Details</button>
+                    <Link to={`job/${id}`}><button className="btn btn-primary">View Details</button></Link>
                 </div>
             </div>
         </div>
